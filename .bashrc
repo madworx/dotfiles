@@ -10,8 +10,9 @@ function transfer() {
 }
 
 export PAGER=less
-export LESS='-Si'
+export LESS='-SifM'
 export LESSCHARSET=UTF-8
+export GIT_PAGER=cat
 
 alias egrep='egrep --color=auto'
 alias grep='grep --color=auto'
