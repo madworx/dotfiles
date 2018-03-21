@@ -65,6 +65,10 @@
 ;;   * Added  binding   for  'filling'  a  marked  section    w/  text
 ;;     justification.
 ;;
+;; 21-Mar-2018:
+;;   * Since 2003,  I've found  that using  the default  font settings
+;;     yields a better result ;-)
+;;
 
 (defun if-gnu-emacs (expr)
   (if (string-match "GNU" (emacs-version))
@@ -89,10 +93,6 @@
 
 (if (not (null window-system))
     (progn
-      (if (eq window-system 'x)
-          (set-default-font "-*-courier-*-r-*-*-12-*-*-*-*-*-*-*" );
-        (if (eq window-system 'w32)
-            (set-default-font "-*-Courier New-bold-r-*-*-14-90-96-96-c-*-iso8859-1")))
       (show-paren-mode t)
       (global-font-lock-mode t)
       (setq font-lock-maximum-decoration t)
