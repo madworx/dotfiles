@@ -81,7 +81,11 @@
       inhibit-startup-message t
       display-time-day-and-date t
       next-line-add-newlines nil
-      blink-cursor-interval 0.25)
+      blink-cursor-interval 0.25
+      vc-follow-symlinks t
+      completion-ignore-case t
+      read-file-name-completion-ignore-case t
+      read-buffer-completion-ignore-case t)
 
 (delete-selection-mode t)
 (display-time)
@@ -145,7 +149,7 @@
 
 
 ;;
-;; Emacs 21 for Windows and OSX apparently maps HOME 
+;; Emacs 21 for Windows and OSX apparently maps HOME
 ;; and END to beginning-of-line and end-of-line instead
 ;; of beginning-of-buffer, end-of-buffer.
 ;;
@@ -273,7 +277,7 @@
   (interactive)
   (save-excursion
     (indent-region (point-min) (point-max) nil)))
-    
+
 
 ;;
 ;; Set up printing on Windows platform.
@@ -300,7 +304,7 @@
     (global-set-key [mouse-5] 'up-slightly)))
 
 ;;
-;; This will add a Java singleton to the current 
+;; This will add a Java singleton to the current
 ;; working class.
 ;;
 (defun java-generate-singleton ()
@@ -308,7 +312,7 @@
   (save-excursion
     (setq start (re-search-backward "^\\(public\\)?? *class \\([a-zA-Z0-9]+\\)"))
     (goto-char start)
-    
+
     (setq C (match-string 2))
     (re-search-forward "\\({ *$\\)")
     (replace-match (concat "\\1\nprivate static " C " _instance = null;\n\n"
@@ -322,19 +326,37 @@
 ;;
 ;; Fill marked section as paragraph, with text justification.
 ;;
-(global-set-key "\C-X\C-\Jf" 
+(global-set-key "\C-X\C-\Jf"
                 '(lambda (start end)
                   (interactive "r")
                   (fill-region-as-paragraph start end 0 nil)))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(safe-local-variable-values (quote ((allout-layout . t)))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
+(defvar my-packages
+  '(ack-and-a-half dockerfile-mode)
+  "A list of packages to ensure are installed at launch.")
+
+(defun packages-install ()
+  (interactive)
+
+  ;; Setup the package repositories we wish to use.
+  (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                      (not (gnutls-available-p))))
+         (proto (if no-ssl "http" "https")))
+    (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+  )
+  (package-initialize)
+  (package-refresh-contents)
+  (dolist (p my-packages)
+    (when (not (package-installed-p p))
+      (package-install p))))
+
+(require 'package)
+
+(add-hook 'python-mode-hook
+  (lambda ()
+    (setq-default tab-width 4)
+    (setq python-indent-offset 4)
+    (add-to-list 'write-file-functions 'delete-trailing-whitespace)
+    (setq whitespace-line-column 79)
+    (setq whitespace-style '(face lines-tail))
+    (whitespace-mode)))
