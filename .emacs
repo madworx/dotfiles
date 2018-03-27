@@ -165,8 +165,13 @@
         (cons "\\.conf$" 'sh-mode)
         (cons "\\.jsp$"  'java-mode)
         (cons "\\.xsl$"  'sgml-mode)
-        (cons "\\akefile" 'makefile-mode))
+        (cons "\\akefile" 'makefile-mode)
+        (cons "README\\.md\\'" 'gfm-mode)
+        (cons "\\.md\\'" 'markdown-mode)
+        (cons "\\.markdown\\'" 'markdown-mode))
        auto-mode-alist))
+
+(setq markdown-command "multimarkdown")
 
 
 ;;
@@ -332,8 +337,9 @@
                   (fill-region-as-paragraph start end 0 nil)))
 
 (defvar my-packages
-  '(ack-and-a-half dockerfile-mode)
+  '(ack-and-a-half dockerfile-mode markdown-mode gfm-mode)
   "A list of packages to ensure are installed at launch.")
+
 
 (defun packages-install ()
   (interactive)
