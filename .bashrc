@@ -14,6 +14,8 @@ export LESS='-SifM'
 export LESSCHARSET=UTF-8
 export GIT_PAGER=cat
 
+export PATH=$PATH:~/bin
+
 alias egrep='egrep --color=auto'
 alias grep='grep --color=auto'
 alias ls='ls --color=auto -FA'
