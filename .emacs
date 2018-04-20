@@ -162,10 +162,11 @@
 (setq auto-mode-alist
       (append
        (list
-        (cons "\\.conf$" 'sh-mode)
-        (cons "\\.jsp$"  'java-mode)
-        (cons "\\.xsl$"  'sgml-mode)
+        (cons "\\.conf\\'" 'sh-mode)
+        (cons "\\.jsp\\'"  'java-mode)
+        (cons "\\.xsl\\'"  'sgml-mode)
         (cons "\\akefile" 'makefile-mode)
+        (cons "Dockerfile" 'dockerfile-mode)
         (cons "README\\.md\\'" 'gfm-mode)
         (cons "\\.md\\'" 'markdown-mode)
         (cons "\\.markdown\\'" 'markdown-mode))
@@ -337,7 +338,7 @@
                   (fill-region-as-paragraph start end 0 nil)))
 
 (defvar my-packages
-  '(ack-and-a-half dockerfile-mode markdown-mode gfm-mode)
+  '(ack-and-a-half dockerfile-mode markdown-mode groovy-mode)
   "A list of packages to ensure are installed at launch.")
 
 
