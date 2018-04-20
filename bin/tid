@@ -1,0 +1,17 @@
+#!/usr/bin/env python
+# -*- mode: python -*-
+
+from datetime import datetime, timedelta
+
+s1 = raw_input("Start time:  ")
+s2 = raw_input("End time:    ")
+s3 = raw_input("Lunch break: ")
+FMT = '%H:%M'
+
+lunch = datetime.strptime(s3, FMT)
+work_time = datetime.strptime(s2, FMT) - \
+             datetime.strptime(s1, FMT)
+lunch_time = timedelta( hours=lunch.hour, minutes=lunch.minute )
+
+print ""
+print "Total working time: " + str(work_time-lunch_time)
