@@ -338,7 +338,7 @@
                   (fill-region-as-paragraph start end 0 nil)))
 
 (defvar my-packages
-  '(dockerfile-mode markdown-mode groovy-mode go-mode)
+  '(dockerfile-mode markdown-mode groovy-mode go-mode yaml-mode dockerfile-mode)
   "A list of packages to ensure are installed at launch.")
 
 
@@ -375,7 +375,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (go-mode golang-mode groovy-mode markdown-mode dockerfile-mode ack-and-a-half))))
+    (docker-mode go-mode golang-mode groovy-mode markdown-mode dockerfile-mode ack-and-a-half))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
