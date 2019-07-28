@@ -4,7 +4,7 @@
 #
 function transfer() {
     : ${1?"usage: ${FUNCNAME[0]} <file or dir> [<file or dir...."}
-    echo "base64 -i -d <<EOT | gzip -cd | tar xvf -"
+    echo "(base64 -d || base64 -D) <<EOT | gzip -cd | tar xvf -"
     tar cf - "$@" | gzip -c9 | base64
     echo "EOT"
 }
