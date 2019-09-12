@@ -1,0 +1,8 @@
+CWDFILE="/var/run/user/${UID}/cwd"
+
+[ -f "${CWDFILE}" ] && cd "$(cat "${CWDFILE}")"
+PS1="\$(pwd > "${CWDFILE}")${PS1}"
+unset CWDFILE
+
+. ~/.bashrc
+
