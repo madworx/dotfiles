@@ -6,6 +6,11 @@ function transfer() {
     echo "EOT"
 }
 
+function brightness() {
+    : ${1?"Usage: ${FUNCNAME[0]} <0-255>"}
+    sudo sh -c "echo $1 > /sys/class/backlight/amdgpu_bl0/brightness"
+}
+
 export PAGER=less
 export LESS='-SifMRF'
 export LESSCHARSET=UTF-8
